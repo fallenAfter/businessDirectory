@@ -4,6 +4,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+//add database packages
+var mongoose= require('mongoose');
+// add passport packages
+var passport= require('passport');
+var session = require('express-session');
+var flash = require('connect-flash');
+var localStrategy= require('passport-local');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
