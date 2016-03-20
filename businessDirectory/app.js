@@ -14,8 +14,11 @@ var localStrategy= require('passport-local');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var auth= require('./routes/auth');
 
 var app = express();
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -29,8 +32,41 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
+//passport config settings
+app.use(session({
+  secret: 'I will sometimes sing Katy Perry when I know I am alone',
+  resave: true,
+  saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+//access the users model
+var Users = require('./models/users');
+passport.use(Users.createStrategy());
+passport.use(new localStrategy(Users.authenticate()));
+
+//serialize and deserialize users
+passport.serializeUser(Users.serializeUser());
+passport.deserializeUser(Users.deserializeUser());
+
+app.use('/', routes, auth);
 app.use('/users', users);
+// app.use('/auth', auth);
+
+//db connection
+var db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'Database Error: '));
+
+db.once('open', function(callback){
+  console.log('Connected to database');
+});
+
+//read mongo connection
+var configDB = require('./config/db.js');
+mongoose.connect(configDB.url)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
