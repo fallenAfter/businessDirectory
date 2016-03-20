@@ -3,7 +3,7 @@ var router= express.Router();
 // auth packages
 var passport= require('passport');
 var mongoose= require('mongoose');
-var Account= require('../models/users');
+var User= require('../models/users');
 var configDb= require('../config/db.js');
 console.log('auth connected');
 
@@ -12,6 +12,19 @@ router.get('/register', function (req,res,next){
 		title: 'register'
 	});
 });
+
+router.post('/register', function (req,res,next){
+	User.register(new User({username: req.body.username}), req.body.password, function (err, account){
+		console.log(err);
+
+		if(err){
+			return res.render('auth/register',{title:'register'});
+		}
+		else{
+			res.redirect('/');
+		}
+	})
+})
 
 
 module.exports=router, passport;

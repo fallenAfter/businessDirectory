@@ -43,13 +43,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //access the users model
-var Users = require('./models/users');
-passport.use(Users.createStrategy());
-passport.use(new localStrategy(Users.authenticate()));
+var User = require('./models/users');
+passport.use(User.createStrategy());
+passport.use(new localStrategy(User.authenticate()));
 
 //serialize and deserialize users
-passport.serializeUser(Users.serializeUser());
-passport.deserializeUser(Users.deserializeUser());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.use('/', routes, auth);
 app.use('/users', users);
