@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title><%= title %></title>
+</head>
+<body>
+	<header>
+		<nav>
+			<ul>
+				<li><a href="/">Home</a></li>
+				<% if(!user){ %>
+					<li><a href="/user/login">Login</a></li>
+					<li><a href="/user/register">Sign Up</a></li>
+				<% } %>
+				<% if(user){ %>
+					<li><a href="/directory/">My Directories</a></li>
+					<li><a href="/directory/add">add directory</a></li>
+					<li><a href="/user/logout">logout</a></li>
+				<% } %>
+			</ul>
+		</nav>
+
+	</header>
+	

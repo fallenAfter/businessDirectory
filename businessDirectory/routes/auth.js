@@ -5,7 +5,7 @@ var passport= require('passport');
 var mongoose= require('mongoose');
 var User= require('../models/users');
 var configDb= require('../config/db.js');
-console.log('auth connected');
+console.log('auth');
 
 passport.serializeUser(function (user, done){
 	done(null,user.id);
@@ -19,7 +19,8 @@ passport.deserializeUser(function (id, done){
 
 router.get('/register', function (req,res,next){
 	res.render('auth/register',{
-		title: 'register'
+		title: 'register',
+		user: req.user
 	});
 });
 
@@ -28,7 +29,7 @@ router.post('/register', function (req,res,next){
 		console.log(err);
 
 		if(err){
-			return res.render('auth/register',{title:'register'});
+			return res.render('auth/register',{title:'register', user: req.user});
 		}
 		else{
 			res.redirect('/');
@@ -54,6 +55,11 @@ router.post('/login', passport.authenticate('local',{
 	failureRedirect: '/auth/login',
 	failureMessage: 'login failed'
 }));
+
+router.get('/logout', function (req,res,next){
+	req.session.destroy();
+	res.redirect('/');
+})
 
 
 module.exports=router, passport;

@@ -15,6 +15,7 @@ var localStrategy= require('passport-local');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var auth= require('./routes/auth');
+var directory= require('./routes/directory');
 
 var app = express();
 
@@ -54,9 +55,11 @@ passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.use('/', routes, auth);
+app.use('/', routes);
 app.use('/users', users);
-// app.use('/auth', auth);
+app.use('/user', auth);
+app.use('/directory', directory);
+
 
 //db connection
 var db = mongoose.connection;

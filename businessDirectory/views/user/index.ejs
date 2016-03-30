@@ -1,0 +1,26 @@
+<%- include ../partials/header.ejs %>
+	<main>
+		<h2>Registred Directories</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Location</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% for(var counter=0;counter<directory.length;counter++){ %>
+					<tr>
+						<td><%- directory[counter].businessName %></td>
+						<td><%- directory[counter].businessAddress %></td>
+						<td><a href="/directory/edit/<%- directory[counter]._id %>">Edit</a></td>
+						<td><a href="/directory/delete/<%- directory[counter]._id %>">Delete</a></td>
+					</tr>
+				<% } %>
+			</tbody>
+			
+		</table>
+	</main>
+<%- include ../partials/footer.ejs %>
