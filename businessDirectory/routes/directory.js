@@ -2,6 +2,25 @@ var express = require('express');
 var router = express.Router();
 var mongoose= require('mongoose');
 var Directory= require('../models/directory');
+var util= require('util');
+//add multer for file uplode
+var multer= require('multer');
+//configure multer for cover photo
+var coverStorage= multer.diskStorage({
+	destination: function (req,file,callback){
+		callback(null, './public/images/cover');
+	},
+	filename: function (req,file,callback){
+		callback(null, Date.now()+'-'+file.originalname );
+	}
+}, function(err){
+	if(err){
+		console.log(err);
+		res.end(err);
+	}
+});
+var uplodeCover= multer({storage:coverStorage}).single('cover');
+
 console.log('directory');
 
 /* GET home page. */
@@ -53,15 +72,28 @@ router.get('/:id', function (req,res,next){
 });
 
 router.post('/add',isAuth, function (req, res, next){
-	console.log('addres: '+req.body.businessAddress);
-	Directory.create({
-		businessName: req.body.businessName,
-		businessAddress: req.body.businessAddress,
-		businessDescription: req.body.businessDescription,
-		account: req.user._id,
-		user: req.user
+
+	//handle file uplode
+	uplodeCover(req,res,function(err){
+		if(err){
+			console.log(err);
+			res.end(err);
+		}
+		else{
+			console.log('file: '+util.inspect(req.file));
+
+			Directory.create({
+				businessName: req.body.businessName,
+				businessAddress: req.body.businessAddress,
+				businessDescription: req.body.businessDescription,
+				account: req.user._id,
+				user: req.user,
+				cover: req.file.filename
+			});
+			res.redirect('/');
+		}
 	});
-	res.redirect('/');
+	
 });
 router.get('/edit/:id', isAuth, function (req,res,next){
 	var id =req.params.id;

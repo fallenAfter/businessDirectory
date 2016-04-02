@@ -4,7 +4,7 @@
 		<section class="column is-4">
 			
 		</section>
-		<form action="/directory/add" method="post" class="column is-8">
+		<form action="/directory/add" method="post" class="column is-8" enctype="multipart/form-data">
 			<fieldset>
 				<legend>Create Directory</legend>
 				<label for="businessName" class="label">Business Name</label>
@@ -13,6 +13,8 @@
 				<input type="text" id="businessAddress" name="businessAddress" class="input">
 				<label for="businessDescription" class="label">Description</label>
 				<textarea type="text" id="businessDescription" name="businessDescription" class="textarea"></textarea>
+				<label class="label">Add cover photo</label>
+				<input type="file" name="cover" id="cover">
 				<input type="submit" class="button">
 			</fieldset>
 		</form>
