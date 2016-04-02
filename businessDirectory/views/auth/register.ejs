@@ -1,19 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Document</title>
-</head>
-<body>
-	<main>
-	<h1>register</h1>
-	<form action="/user/register" method="post">
-		<fieldset><label for="username">Username</label><input id="username" name="username" type="text"></fieldset>
-		<fieldset><label for="password">Password</label><input id="password" name="password" type="password"></fieldset>
-		<fieldset><label for="confirm">Confirm Password</label><input id="confirm" type="password"></fieldset>
-		<button>Register</button>
+<%- include ../partials/header.ejs %>
+<main>
+	<form action="/user/register" method="post" class="column is-half is-offset-quarter">
+
+		<fieldset>
+			<legend><h1>register</h1></legend>
+			<label for="username" class="label">Username</label><input id="username" name="username" type="text" class="input">
+			<label for="password" class="label">Password</label><input id="password" name="password" type="password" class="input"></fieldset>
+			<label for="confirm" class="label">Confirm Password</label><input id="confirm" type="password" class="input">
+			<button class="button">Register</button>
+		</fieldset>
+		
 	</form>
 </main>
-
-</body>
-</html>
+<%- include ../partials/footer.ejs %>

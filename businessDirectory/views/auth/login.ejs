@@ -1,20 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Document</title>
-</head>
-<body>
-	<main>
-		<h1>Login</h1>
-		<form action="/user/login" method="post">
-			<fieldset><label for="username">Username</label><input id="username" name="username" type="text"></fieldset>
-			<fieldset><label for="password">Password</label><input id="password" name="password" type="password"></fieldset>
+<%- include ../partials/header.ejs %>
+	<main class="columns">
+		
+		<form action="/user/login" method="post" class="column is-half is-offset-quarter">
+			<fieldset>
+				<legend><h1>Login</h1></legend>
+
+				<label for="username" class="label">Username</label><input id="username" name="username" type="text" class="input">
+				<label for="password" class="label">Password</label><input id="password" name="password" type="password" class="input"></fieldset>
 			
-			<button>login</button>
+			<button class="button">login</button>
 		</form>
 
 	</main>
-
-</body>
-</html>
+<%- include ../partials/footer.ejs %>

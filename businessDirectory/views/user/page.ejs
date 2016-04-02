@@ -1,5 +1,19 @@
 <%- include ../partials/header.ejs %>
-	<main>
-		this
+	<aside>
+		<section class="hero">
+				<img src="" alt="<%= directory.businessName %>">
+		</section>
+	</aside>
+	<main class="columns">
+		<section class="column is-8">
+			<h1><%= directory.businessName %></h1>
+			<p><%= directory.businessDescription %></p>
+		</section>
+		<section class="column is-4">
+			<h2>Address:</h2>
+			<address><%= directory.businessAddress %></address>
+		</section>
 	</main>
 <%- include ../partials/footer.ejs %>
+
+

@@ -1,6 +1,6 @@
 <%- include ./partials/header.ejs %>
-	<main>
-		<section>
+	<main class="columns">
+		<section class="column is-8">
 			<h2>Directory</h2>
 				<% for(var counter=0;counter<directory.length;counter++){ %>
 					<a href="/directory/<%= directory[counter]._id %>">
@@ -10,6 +10,9 @@
 						</section>
 					</a>
 				<% } %>
+		</section>
+		<section call="column is-4">
+			
 		</section>
 	</main>
 <%- include ./partials/footer.ejs %>

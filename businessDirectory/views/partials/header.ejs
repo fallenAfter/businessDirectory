@@ -2,23 +2,26 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.0.17/css/bulma.min.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
 	<title><%= title %></title>
 </head>
 <body>
-	<header>
-		<nav>
-			<ul>
-				<li><a href="/">Home</a></li>
-				<% if(!user){ %>
-					<li><a href="/user/login">Login</a></li>
-					<li><a href="/user/register">Sign Up</a></li>
-				<% } %>
-				<% if(user){ %>
-					<li><a href="/directory/">My Directories</a></li>
-					<li><a href="/directory/add">add directory</a></li>
-					<li><a href="/user/logout">logout</a></li>
-				<% } %>
-			</ul>
+	<header class="navbar">
+		<section class="navbar-left">
+			
+		</section>
+		<nav class="navbar-right">
+			<p class="navbar-item"><a href="/">Home</a></p>
+			<% if(!user){ %>
+				<p class="navbar-item"><a href="/user/login">Login</a></p>
+				<p class="navbar-item"><a href="/user/register">Sign Up</a></p>
+			<% } %>
+			<% if(user){ %>
+				<p class="navbar-item"><a href="/directory/">My Directories</a></p>
+				<p class="navbar-item"><a href="/directory/add">add directory</a></p>
+				<p class="navbar-item"><a href="/user/logout">logout</a></p>
+			<% } %>
 		</nav>
 
 	</header>
